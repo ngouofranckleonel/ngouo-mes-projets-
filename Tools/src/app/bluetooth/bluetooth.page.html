@@ -1,0 +1,221 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Bluetooth
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="searching">
+    <ion-item>
+      <ion-label>
+        Recherche de périphériques...
+      </ion-label>
+      <ion-spinner slot="end"></ion-spinner>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="devices.length > 0 && !connectedDevice">
+    <ion-item *ngFor="let device of devices">
+      <ion-icon name="bluetooth" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{device.name}}</h2>
+        <p>{{device.id}}</p>
+        <ion-button slot="end" (click)="connect(device)">Connecter</ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="connectedDevice">
+    <ion-item>
+      <ion-icon name="bluetooth" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{connectedDevice.name}}</h2>
+        <p>{{connectedDevice.id}}</p>
+        <ion-button slot="end" color="danger" (click)="disconnect()">Déconnecter</ion-button>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="data" placeholder="Entrez les données à envoyer"></ion-input>
+      <ion-button slot="end" (click)="send(data)">Envoyer</ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="message">
+      <ion-label>{{message}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="devices.length === 0 && !searching">
+    <ion-item>
+      <ion-label>
+        Aucun périphérique trouvé. Veuillez rechercher des périphériques.
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="scan()" [disabled]="searching">
+    Rechercher des périphériques
+  </ion-button>  
+</ion-content> 
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Bluetooth
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="searching">
+    <ion-item>
+      <ion-label>
+        Recherche de périphériques...
+      </ion-label>
+      <ion-spinner slot="end"></ion-spinner>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="devices.length > 0 && !connectedDevice">
+    <ion-item *ngFor="let device of devices">
+      <ion-icon name="bluetooth" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{device.name}}</h2>
+        <p>{{device.id}}</p>
+        <ion-button slot="end" (click)="connect(device)">Connecter</ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="connectedDevice">
+    <ion-item>
+      <ion-icon name="bluetooth" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{connectedDevice.name}}</h2>
+        <p>{{connectedDevice.id}}</p>
+        <ion-button slot="end" color="danger" (click)="disconnect()">Déconnecter</ion-button>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="data" placeholder="Entrez les données à envoyer"></ion-input>
+      <ion-button slot="end" (click)="send(data)">Envoyer</ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="message">
+      <ion-label>{{message}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="devices.length === 0 && !searching">
+    <ion-item>
+      <ion-label>
+        Aucun périphérique trouvé. Veuillez rechercher des périphériques.
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" (click)="scan()" [disabled]="searching">
+    Rechercher des périphériques
+  </ion-button>  
+</ion-content>  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Bluetooth
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="searching">
+    <ion-item>
+      <ion-label>
+        Searching for devices...
+      </ion-label>
+      <ion-spinner slot="end"></ion-spinner>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="devices.length > 0 && !connectedDevice">
+    <ion-item *ngFor="let device of devices">
+      <ion-icon name="bluetooth" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{device.name}}</h2>
+        <p>{{device.id}}</p>
+        <ion-button slot="end" (click)="connect(device)">Connect</ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="connectedDevice">
+    <ion-item>
+      <ion-icon name="bluetooth" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{connectedDevice.name}}</h2>
+        <p>{{connectedDevice.id}}</p>
+        <ion-button slot="end" color="danger" (click)="disconnect()">Disconnect</ion-button>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="data" placeholder="Enter data to send"></ion-input>
+      <ion-button slot="end" (click)="send(data)">Send</ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="message">
+      <ion-label>{{message}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="devices.length === 0 && !searching">
+    <ion-item>
+      <ion-label>
+        No devices found. Please scan for devices.
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button  expand="block" (click)="scan()" [disabled]="searching">
+    Scan for Devices
+  </ion-button>
+  
+</ion-content>
+ -->
